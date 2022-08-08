@@ -1,8 +1,16 @@
 require('dotenv').config();
 let express = require('express');
 let app = express();
-console.log('Hello World');
-// bGround.log('Hello World');
+
+
+//Implement a Root-Level Request Logger Middleware
+app.use(function(req, res, next) {
+    console.log(req.method + " " + req.path + " - " + req.ip);
+    next();
+});
+
+
+console.log("Hello World");
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html');
@@ -20,6 +28,8 @@ app.use('/public', express.static(__dirname + '/public'));
 //     );
 // });
 
+
+//Use the .env file
 app.get(/json/, (req, res) => {
     console.log(process.env.MESSAGE_STYLE, " <= message style");
     if (process.env.MESSAGE_STYLE === 'uppercase') {
@@ -32,7 +42,6 @@ app.get(/json/, (req, res) => {
         )
     }
 });
-
 
 
 
