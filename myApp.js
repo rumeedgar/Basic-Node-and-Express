@@ -5,7 +5,7 @@ let app = express();
 
 //Implement a Root-Level Request Logger Middleware
 app.use(function(req, res, next) {
-    console.log(req.method + " " + req.path + " - " + req.ip);
+    console.log(req.method + " " + req.path + " -- " + req.ip);
     next();
 });
 
@@ -44,6 +44,17 @@ app.get(/json/, (req, res) => {
 });
 
 
+//Chaining middleware. A time server.
+function getTheCurrentTimeString() {
+   return new Date().toString();
+}
+
+app.get("/now", function(req, res, next) {
+    req.time = getTheCurrentTimeString();
+    next();
+}, function(req, res) {
+    res.json({ time: req.time });
+})
 
 
 
