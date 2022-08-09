@@ -56,7 +56,13 @@ app.get("/now", function(req, res, next) {
     res.json({ time: req.time });
 })
 
-
+//Get Route Parameter Input from the Client
+app.get("/:word/echo", (req, res) => {
+    const { word} = req.params;
+    res.json({
+        echo: word
+    });
+});
 
 
 
