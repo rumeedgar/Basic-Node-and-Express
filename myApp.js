@@ -64,7 +64,14 @@ app.get("/:word/echo", (req, res) => {
     });
 });
 
-
+//Get Query Parameter Input from the Client
+app.get("/name", (req, res) => {
+    var firstName = req.query.firstName;
+    var lastName = req.query.lastName;
+    res.json({
+        name: `${firstName} ${lastName}`
+    });
+});
 
 
 
